@@ -28,6 +28,16 @@ Double-click `linkscope.pyw`, or run:
 pythonw linkscope.pyw
 ```
 
+### Desktop icon and taskbar
+
+```
+powershell -ExecutionPolicy Bypass -File install-shortcut.ps1
+```
+
+This creates `LinkScope` shortcuts on the Desktop and in the Start Menu. To pin it, right-click the Desktop icon and choose **Pin to taskbar** (Windows doesn't let scripts pin). The shortcut and the app share an AppUserModelID, so the pinned icon and the running window use one taskbar button.
+
+Run the script again if you move the folder or upgrade Python.
+
 ## Limits
 
 - Passive only. A device that stays completely silent until something talks to it won't appear. Power-cycling it while LinkScope is open usually reveals it, because almost every device sends ARP or DHCP while booting.

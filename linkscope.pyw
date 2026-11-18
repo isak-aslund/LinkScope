@@ -1017,13 +1017,24 @@ class App:
         ttk.Button(bf, text="Remove", command=ok).pack(side="right", padx=6)
 
 
+APP_ID = "LinkScope.NetworkDebugger"  # must match install-shortcut.ps1
+ICON = os.path.join(os.path.dirname(os.path.abspath(__file__)), "linkscope.ico")
+
+
 def main():
     try:
         ctypes = __import__("ctypes")
+        # own taskbar identity, so a pinned shortcut and this window share one button
+        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(APP_ID)
         ctypes.windll.shcore.SetProcessDpiAwareness(1)
     except Exception:  # noqa: BLE001
         pass
     root = tk.Tk()
+    if os.path.exists(ICON):
+        try:
+            root.iconbitmap(default=ICON)
+        except tk.TclError:
+            pass
     App(root)
     root.mainloop()
 
